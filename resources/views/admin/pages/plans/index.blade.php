@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Plans')
 
 @section('content_header')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
             <li class="breadcrumb-item active" aria-current="page">Plans</li>
         </ol>
     </nav>

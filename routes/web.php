@@ -1,11 +1,9 @@
 <?php
-
-
 use App\Http\Controllers\Admin\PlanController;
-use Illuminate\Support\Facades\Route;
-
-Route::get('/home', function () {
-    return view('vendor.adminlte.master');
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+Route::prefix('admin')->namespace('Admin')->group(function (){
+    Route::get('/','DashboardController@index')->name('admin');
+    Route::resource('plans','PlanController');
 });
-
-Route::resource('admin/plans','Admin\PlanController');
