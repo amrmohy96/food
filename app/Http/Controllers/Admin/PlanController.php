@@ -3,69 +3,63 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdatePlan;
+use App\Models\Plan;
 use Illuminate\Http\Request;
 
 class PlanController extends Controller
 {
+    private $repo;
 
-    public function index()
+    public function __construct(Plan $plan)
     {
-        return view('admin.pages.plans.index');
+        $this->repo = $plan;
+    }
+
+    public function index(Request $request)
+    {
+        $plans = $this->repo->search($request)->latest()->paginate(2);
+        return view('admin.pages.plans.index', compact('plans'));
     }
 
     public function create()
     {
-        //
+        return view('admin.pages.plans.create');
     }
 
 
-    public function store(Request $request)
+    public function store(StoreUpdatePlan $request)
     {
-        //
+        $this->repo->create($request->all());
+        return redirect()->route('plans.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function show($url)
     {
-        //
+        $plan = $this->repo->where('url', $url)->first();
+        return view('admin.pages.plans.show', compact('plan'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function edit($url)
     {
-        //
+        $plan = $this->repo->where('url', $url)->first();
+        return view('admin.pages.plans.edit', compact('plan'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(StoreUpdatePlan $request, $url)
     {
-        //
+        $plan = $this->repo->where('url', $url)->first();
+        $plan->update($request->all());
+        return redirect()->route('plans.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($url)
     {
-        //
+        $plan = $this->repo->where('url', $url);
+        $plan->delete();
+        return redirect()->route('plans.index');
     }
 }
