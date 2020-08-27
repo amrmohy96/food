@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-
+use App\Models\DetailPlan;
 /**
  * App\Models\Plan
  *
@@ -26,10 +26,18 @@ use Illuminate\Http\Request;
  * @method static \Illuminate\Database\Eloquent\Builder|Plan whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Plan whereUrl($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|DetailPlan[] $details
+ * @property-read int|null $details_count
  */
 class Plan extends Model
 {
     protected $guarded = [];
+
+    public function details()
+    {
+        return $this->hasMany(DetailPlan::class);
+    }
+
 
     public function getRouteKeyName()
     {
@@ -44,4 +52,6 @@ class Plan extends Model
                 ->orWhere('price', 'like', '%' . $request->search . '%');
         });
     }
+
+
 }

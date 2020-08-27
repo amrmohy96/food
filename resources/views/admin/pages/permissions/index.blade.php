@@ -1,12 +1,12 @@
 @extends('adminlte::page')
 
-@section('title', 'Plans')
+@section('title', 'Profiles')
 
 @section('content_header')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Plans</li>
+            <li class="breadcrumb-item active" aria-current="page">Permissions</li>
         </ol>
     </nav>
 @stop
@@ -15,14 +15,14 @@
 
     <div class="card">
         <div class="card-header bg-black">
-            <form method="get" action="{{route('plans.index')}}">
+            <form method="get" action="{{route('permissions.index')}}">
                 <div class="row">
                     <div class="col-md-4">
                         <input type="text" name="search" class="form-control-sm border"
                                value="{{request()->search}}" placeholder="search">
                         <button type="submit" class="btn btn-primary btn-sm border"><i class="fa fa-search"></i>
                         </button>
-                        <a class="btn btn-sm btn-danger border" href="{{route('plans.create')}}"><i
+                        <a class="btn btn-sm btn-danger border" href="{{route('permissions.create')}}"><i
                                 class="fa fa-plus"></i></a>
                     </div>
                 </div>
@@ -30,31 +30,28 @@
 
         </div>
         <div class="card-body">
-            @if($plans->count() > 0)
+            @if($permissions->count() > 0)
                 <table class="table table-hover">
                     <thead>
                     <tr>
                         <th><i class="fab fa-hackerrank fa-1x"></i></th>
                         <th><i class="fab fa-product-hunt fa-1x"></i> Name</th>
-                        <th><i class="fa fa-money-check fa-1x"></i> Price</th>
-                        <th width="350"><i class="fas fa-pen fa-1x"></i> Action</th>
+                        <th width="250"><i class="fas fa-pen fa-1x"></i> Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($plans as $index=>$plan)
+                    @foreach($permissions as $index=>$permission)
                         <tr>
                             <td>{{$index + 1}}</td>
-                            <td>{{$plan->name}}</td>
-                            <td>$ {{number_format($plan->price,2,',','.')}}</td>
+                            <td>{{$permission->name}}</td>
                             <td>
-                                <a class="btn btn-sm btn-dark" href="{{route('details.index',$plan->url)}}"> <i
-                                        class="fa fa-info-circle fa-1x"></i> details</a>
-                                <a class="btn btn-sm btn-warning" href="{{route('plans.show',$plan->url)}}"> <i
+
+                                <a class="btn btn-sm btn-warning" href="{{route('permissions.show',$permission->id)}}"> <i
                                         class="fa fa-eye fa-1x"></i> show</a>
-                                <a class="btn btn-sm btn-primary" href="{{route('plans.edit',$plan->url)}}"><i
+                                <a class="btn btn-sm btn-primary" href="{{route('permissions.edit',$permission->id)}}"><i
                                         class="fa fa-edit fa-1x"></i> edit</a>
                                 <form style="display: inline-block;" method="post"
-                                      action="{{route('plans.destroy',$plan->url)}}">
+                                      action="{{route('permissions.destroy',$permission->id)}}">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-danger delete btn-sm"><i class="fa fa-trash fa-1x"></i> delete
@@ -65,9 +62,9 @@
                     @endforeach
                     </tbody>
                 </table>
-                @include('incs.pag',['data' => $plans])
+                @include('incs.pag',['data' => $permissions])
             @else
-                <h6 class="text-center text-danger">no plans</h6>
+                <h6 class="text-center text-danger">no permissions</h6>
             @endif
         </div>
         <div class="card-footer bg-black">

@@ -31,6 +31,7 @@ class PlanController extends Controller
     public function store(StoreUpdatePlan $request)
     {
         $this->repo->create($request->all());
+        session()->flash('success', __('saved'));
         return redirect()->route('plans.index');
     }
 
