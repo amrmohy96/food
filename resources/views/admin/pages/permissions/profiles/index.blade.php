@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'permission for profile / '.$profile->name)
+@section('title', '  profile for permission/ '.$permission->name)
 
 @section('content_header')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{route('profiles.index')}}">Profiles</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{$profile->name}} Permissions</li>
+            <li class="breadcrumb-item"><a href="{{route('profiles.index')}}">profiles</a></li>
+            <li class="breadcrumb-item active" aria-current="page">profiles for permission <strong>{{$permission->name}}</strong> </li>
         </ol>
     </nav>
 @stop
@@ -16,10 +16,9 @@
 
     <div class="card">
         <div class="card-header bg-black">
-            <a class="btn btn-sm btn-danger border" href="{{route('profiles.permissions.available',$profile->id)}}"><i class="fa fa-plus"></i> Add</a>
         </div>
         <div class="card-body">
-            @if($permissions->count() > 0)
+            @if($profiles->count() > 0)
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -29,10 +28,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($permissions as $index=>$permission)
+                    @foreach($profiles as $index=>$profile)
                         <tr>
                             <td>{{$index + 1}}</td>
-                            <td>{{$permission->name}}</td>
+                            <td>{{$profile->name}}</td>
                             <td>
                                 <a href="{{route('profiles.permissions.detach',[$profile->id,$permission->id])}}" class="btn btn-danger">delete</a>
                             </td>
@@ -40,9 +39,9 @@
                     @endforeach
                     </tbody>
                 </table>
-                @include('incs.pag',['data' => $permissions])
+                @include('incs.pag',['data' => $profiles])
             @else
-                <h6 class="text-center text-danger">not have permissions</h6>
+                <h6 class="text-center text-danger">not have profiles</h6>
             @endif
         </div>
         <div class="card-footer bg-black">

@@ -36,7 +36,7 @@
                     <tr>
                         <th><i class="fab fa-hackerrank fa-1x"></i></th>
                         <th><i class="fab fa-product-hunt fa-1x"></i> Name</th>
-                        <th width="250"><i class="fas fa-pen fa-1x"></i> Action</th>
+                        <th width="300"><i class="fas fa-pen fa-1x"></i> Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -46,8 +46,11 @@
                             <td>{{$permission->name}}</td>
                             <td>
 
+                                <a class="btn btn-sm btn-dark" href="{{route('permissions.profiles',$permission->id)}}"> <i
+                                        class="fa fa-user fa-1x"></i></a>
                                 <a class="btn btn-sm btn-warning" href="{{route('permissions.show',$permission->id)}}"> <i
                                         class="fa fa-eye fa-1x"></i> show</a>
+
                                 <a class="btn btn-sm btn-primary" href="{{route('permissions.edit',$permission->id)}}"><i
                                         class="fa fa-edit fa-1x"></i> edit</a>
                                 <form style="display: inline-block;" method="post"

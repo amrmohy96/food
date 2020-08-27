@@ -36,7 +36,7 @@
                     <tr>
                         <th><i class="fab fa-hackerrank fa-1x"></i></th>
                         <th><i class="fab fa-product-hunt fa-1x"></i> Name</th>
-                        <th width="300"><i class="fas fa-pen fa-1x"></i> Action</th>
+                        <th width="200"><i class="fas fa-pen fa-1x"></i> Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -47,15 +47,17 @@
                             <td>
                                 <a class="btn btn-sm btn-dark" href="{{route('profiles.permissions',$profile->id)}}"> <i
                                         class="fa fa-lock fa-1x"></i></a>
+                                <a class="btn btn-sm btn-secondary" href="{{route('profiles.plans',$profile->id)}}"> <i
+                                        class="fas fa-th-list fa-1x"></i></a>
                                 <a class="btn btn-sm btn-warning" href="{{route('profiles.show',$profile->id)}}"> <i
-                                        class="fa fa-eye fa-1x"></i> show</a>
+                                        class="fa fa-eye fa-1x"></i></a>
                                 <a class="btn btn-sm btn-primary" href="{{route('profiles.edit',$profile->id)}}"><i
-                                        class="fa fa-edit fa-1x"></i> edit</a>
+                                        class="fa fa-edit fa-1x"></i></a>
                                 <form style="display: inline-block;" method="post"
                                       action="{{route('profiles.destroy',$profile->id)}}">
                                     @csrf
                                     @method('delete')
-                                    <button class="btn btn-danger delete btn-sm"><i class="fa fa-trash fa-1x"></i> delete
+                                    <button class="btn btn-danger delete btn-sm"><i class="fa fa-trash fa-1x"></i>
                                     </button>
                                 </form>
                             </td>

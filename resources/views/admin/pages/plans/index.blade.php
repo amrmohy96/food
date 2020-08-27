@@ -47,7 +47,9 @@
                             <td>{{$plan->name}}</td>
                             <td>$ {{number_format($plan->price,2,',','.')}}</td>
                             <td>
-                                <a class="btn btn-sm btn-dark" href="{{route('details.index',$plan->url)}}"> <i
+                                <a class="btn btn-sm btn-dark" href="{{route('plans.profiles',$plan->id)}}"> <i
+                                        class="fa fa-user fa-1x"></i></a>
+                                <a class="btn btn-sm btn-success" href="{{route('details.index',$plan->url)}}"> <i
                                         class="fa fa-info-circle fa-1x"></i> details</a>
                                 <a class="btn btn-sm btn-warning" href="{{route('plans.show',$plan->url)}}"> <i
                                         class="fa fa-eye fa-1x"></i> show</a>
@@ -57,7 +59,8 @@
                                       action="{{route('plans.destroy',$plan->url)}}">
                                     @csrf
                                     @method('delete')
-                                    <button class="btn btn-danger delete btn-sm"><i class="fa fa-trash fa-1x"></i> delete
+                                    <button class="btn btn-danger delete btn-sm"><i class="fa fa-trash fa-1x"></i>
+                                        delete
                                     </button>
                                 </form>
                             </td>

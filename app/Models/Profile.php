@@ -40,6 +40,11 @@ class Profile extends Model
         return $this->belongsToMany(Permission::class);
     }
 
+    public function plans()
+    {
+        return $this->belongsToMany(Plan::class);
+    }
+
 //
 
     /**
@@ -57,4 +62,5 @@ class Profile extends Model
             return $q->where('permissions.name', 'like', '%' . $request->search . '%');
         })->paginate();
     }
+
 }

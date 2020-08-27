@@ -53,5 +53,24 @@ class Plan extends Model
         });
     }
 
+    public function profiles()
+    {
+        return $this->belongsToMany(Profile::class);
+    }
+
+    /**
+     * @param Request $request
+     * SELECT * FROM profiles WHERE id not in ( SELECT profile_id FROM plan_profile WHERE plan_id = 5)
+     */
+    public function getAvailableProfiles(Request $request)
+    {
+       return Profile::whereNotIn('profiles.id',function ($q){
+           $q->select('plan_profile.profile_id');
+           $q->from('plan_profile');
+           $q->whereRaw("plan_profile.plan_id={$this->id}");
+       })->when($request->search,function ($q) use($request){
+           return $q->where('name','like','%'.$request->search.'%');
+       })->paginate();
+    }
 
 }
